@@ -1,7 +1,8 @@
-package org.irma.vipmanage.parser;
+package org.irma.httpd.config;
 
 import static org.junit.Assert.assertEquals;
 
+import org.irma.httpd.config.TextScanner;
 import org.junit.Test;
 
 public class TextScannerTest {
@@ -62,5 +63,22 @@ public class TextScannerTest {
         TextScanner scanner = new TextScanner("ab\rc\nde\rf\r\nklm");
         assertEquals("ab\rc", scanner.nextLine());
         assertEquals("de\rf", scanner.nextLine());
+    }
+    
+    @Test
+    public void testCurrentPosition() {
+        TextScanner scanner = new TextScanner("ab\rc\nde\rf\r\nklm");
+        assertEquals(0, scanner.getCurrentPosition());
+        scanner.nextLine();
+        assertEquals(5, scanner.getCurrentPosition());
+    }
+    
+    @Test
+    public void testFirstNonSpaceCharacter() {
+        TextScanner scanner = new TextScanner("   abc\n\t\t   de");
+        assertEquals('a', scanner.getFirstNonSpaceCharacter());
+        assertEquals('b', scanner.getFirstNonSpaceCharacter());
+        scanner.nextLine();
+        assertEquals('d', scanner.getFirstNonSpaceCharacter());
     }
 }

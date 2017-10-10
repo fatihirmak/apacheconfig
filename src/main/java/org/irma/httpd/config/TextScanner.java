@@ -1,13 +1,11 @@
-package org.irma.vipmanage.parser;
+package org.irma.httpd.config;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.stream.Stream;
+import static org.irma.httpd.config.Constants.CARRIAGE_RETURN;
+import static org.irma.httpd.config.Constants.INDEX_BEGINNING;
+import static org.irma.httpd.config.Constants.LINE_FEED;
 
 public class TextScanner {
-    private static final short INDEX_BEGINNING = 0;
-    private static final char LINE_FEED = 10;
-    private static final char CARRIAGE_RETURN = 13;
+    
     private char[] text;
     private int index;
     
@@ -46,6 +44,10 @@ public class TextScanner {
         return index == INDEX_BEGINNING;
     }
     
+    public int getCurrentPosition() {
+        return index;
+    }
+    
     public String nextLine() {
         StringBuffer buffer = new StringBuffer();
         while (!isEnd() && !isNextNewLineCharacter()) {
@@ -59,9 +61,6 @@ public class TextScanner {
     }
     
     private boolean isNextNewLineCharacter() {
-        if (isEnd()) {
-            return false;
-        }
         boolean isNextNewLineCharacter = false;
         char ch = forward();
         if (ch == LINE_FEED) {
@@ -72,5 +71,15 @@ public class TextScanner {
         }
         retreat();
         return isNextNewLineCharacter;
+    }
+    
+    public char getFirstNonSpaceCharacter() {
+        while (!isEnd()) {
+            char next = forward();
+            if (!(next == ' ' || next == '\t')) {
+                return next;
+            }
+        }
+        return '\0';
     }
 }
