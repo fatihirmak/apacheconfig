@@ -3,8 +3,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.irma</groupId>
-  <artifactId>vipmanage</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <artifactId>apacheconfig</artifactId>
+  <version>1.0</version>
   <packaging>jar</packaging>
 
   <name>vipmanage</name>
