@@ -22,7 +22,8 @@ public class DocumentWriter {
     
     @SuppressWarnings("unchecked")
 	public void write(Element element) throws IOException {
-		ElementWriter writer = element.geElementWriter();
+		@SuppressWarnings("rawtypes")
+        ElementWriter writer = element.geElementWriter();
         writer.write(element, getWriter());
         getWriter().flush();
     }

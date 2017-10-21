@@ -13,7 +13,7 @@ A document might have different kinds of elements:
 - `Section`: Sections are the scope elements that can have multiple directives/comments or other sections.
 
 An example document:
-
+```
 These are comments
 \#Apache httpd.conf file
 \#This file is the main configuration holder for Apache server.
@@ -29,7 +29,7 @@ A section:
     Order allow,deny
     Deny from all
 </FilesMatch>
-
+```
 ## Reading
 
 ```

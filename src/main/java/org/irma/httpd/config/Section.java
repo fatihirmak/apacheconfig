@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Section extends Directive implements ElementContainer {
 	private static final SectionWriter WRITER = new SectionWriter();
+	private static final ElementContainerHelper HELPER = new ElementContainerHelper();
 	
     private List<Element> elements;
     
@@ -20,6 +21,11 @@ public class Section extends Directive implements ElementContainer {
     @Override
     public List<Element> getElements() {
         return elements;
+    }
+    
+    @Override
+    public <T extends Element> List<T> getElements(Class<T> cls) {
+        return HELPER.getElements(getElements(), cls);
     }
     
     @Override
