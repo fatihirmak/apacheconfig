@@ -14,17 +14,17 @@ A document might have different kinds of elements:
 
 An example document:
 ```
-These are comments
-\#Apache httpd.conf file
-\#This file is the main configuration holder for Apache server.
+#These are comments
+#Apache httpd.conf file
+#This file is the main configuration holder for Apache server.
 
-A directive with a single argument:
+#A directive with a single argument:
 ThreadsPerChild 250
 
-A directive with multiple arguments:
+#A directive with multiple arguments:
 LoadModule imagemap_module modules/mod_imagemap.so
 
-A section:
+#A section:
 <FilesMatch "^.ht">
     Order allow,deny
     Deny from all
@@ -46,6 +46,11 @@ while (Element element : document.getElements()) {
         System.out.println(section.getName());
         System.out.println(section.getElements());
     }
+}
+
+#Get only directives
+while (Directive directive : document.getElements(Directive.class)) {
+    System.out.println(directive.getName());
 }
 ```
 
