@@ -1,11 +1,16 @@
 package org.irma.httpd.config;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Section extends Directive implements ElementContainer {
 	private static final SectionWriter WRITER = new SectionWriter();
 	
     private List<Element> elements;
+    
+    public Section(String name) {
+        this(name, new ArrayList<String>(), new ArrayList<Element>());
+    }
     
     public Section(String name, List<String> arguments, List<Element> elements) {
     	super(name, arguments);
