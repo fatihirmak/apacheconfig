@@ -1,11 +1,17 @@
 package org.irma.httpd.config;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Section extends Directive implements ElementContainer {
 	private static final SectionWriter WRITER = new SectionWriter();
+	private static final ElementContainerHelper HELPER = new ElementContainerHelper();
 	
     private List<Element> elements;
+    
+    public Section(String name) {
+        this(name, new ArrayList<String>(), new ArrayList<Element>());
+    }
     
     public Section(String name, List<String> arguments, List<Element> elements) {
     	super(name, arguments);
@@ -15,6 +21,11 @@ public class Section extends Directive implements ElementContainer {
     @Override
     public List<Element> getElements() {
         return elements;
+    }
+    
+    @Override
+    public <T extends Element> List<T> getElements(Class<T> cls) {
+        return HELPER.getElements(getElements(), cls);
     }
     
     @Override

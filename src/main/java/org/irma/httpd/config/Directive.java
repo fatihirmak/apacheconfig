@@ -1,5 +1,6 @@
 package org.irma.httpd.config;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Directive implements Element {
@@ -7,6 +8,10 @@ public class Directive implements Element {
     private String name;
     private List<String> arguments;
     
+    public Directive(String name) {
+        this(name, new ArrayList<String>());
+    }
+
     public Directive(String name, List<String> arguments) {
     	this.name = name;
         this.arguments = arguments;

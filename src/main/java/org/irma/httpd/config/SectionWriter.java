@@ -3,7 +3,8 @@ package org.irma.httpd.config;
 import java.io.IOException;
 
 class SectionWriter extends DirectiveWriter {
-
+    private static final ElementContainerHelper HELPER = new ElementContainerHelper();
+    
     @Override
     public void write(Directive d, TextWriter writer) throws IOException {
     	Section section = (Section) d;
@@ -16,10 +17,7 @@ class SectionWriter extends DirectiveWriter {
         writer.newLine();
         
         writer.increaseIndent();
-        for (Element element : section.getElements()) {
-        	ElementWriter elementWriter = element.geElementWriter();
-        	elementWriter.write(element, writer);
-        }
+        HELPER.write(section, writer);
         writer.decreaseIndent();
         writer.append(Constants.LESS_THAN);
         writer.append(Constants.SLASH);
